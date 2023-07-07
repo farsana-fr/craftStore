@@ -67,7 +67,8 @@ function Dashboard() {
             <Nav className="ms-auto">
               {/* <Nav.Link href="/login">Logout</Nav.Link> */}
               
-              <Link className="links " to={`/myCart/${email}`}>My Cart</Link>
+              <Link className="links " to={`/myOrder/${email}`}>My Order</Link>
+              <Link className="links ms-5" to={`/myCart/${email}`}>My Cart</Link>
               <Link className="links ms-5" to={`/login`}>Logout</Link>
               
              

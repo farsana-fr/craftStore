@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Col, Row } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 function EditProd() {
-
+  const navigate = useNavigate();
+  const goBack = () => {
+		navigate(-1);
+	}
     const [id,setId]=useState();
     const [type,setType]=useState();
     const [name,setName]=useState();
@@ -38,10 +41,26 @@ function EditProd() {
         displayData()
       },[])
   return (
-    <div className='container'>
+    <div >
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand ></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
+              {/* <Nav.Link href="/login">Logout</Nav.Link> */}
+              {/* <Link className="links " to={`/myCart/${email}`}>My Cart</Link> */}
+              <Link className="links ms-5" to={`/login`}>Logout</Link>
+              <Link className="links ms-5" onClick={goBack}>Back</Link>
+              
+             
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
         <h1 className="text-danger">Edit Product
             </h1>
-            <Row>
+            <Row className='container'>
                 <Col lg={6}>
                 <img className='ms-5 mt-5' src={img} alt="" width="200" /><br />
                 <h6 className='ms-5'>Product: {name}</h6>

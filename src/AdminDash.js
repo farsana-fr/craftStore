@@ -4,14 +4,17 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Dashboard() {
-
+  const navigate = useNavigate();
+  const goBack = () => {
+		navigate(-1);
+	}
   const [products,setProducts]=useState()
    const [email,setEmail]=useState()
   const viewProds=async ()=>{
@@ -55,6 +58,7 @@ function Dashboard() {
               {/* <Nav.Link href="/login">Logout</Nav.Link> */}
               {/* <Link className="links " to={`/myCart/${email}`}>My Cart</Link> */}
               <Link className="links ms-5" to={`/login`}>Logout</Link>
+              <Link className="links ms-5" onClick={goBack}>Back</Link>
               
              
             </Nav>
@@ -66,6 +70,7 @@ function Dashboard() {
       
       <div className="container p-4 ">
       <Link to={'/Add'}><Button className='btn btn-secondary w-25 p-3 text-center'>Add New Products</Button></Link>
+      <Link to={'/Orders'}><Button className='btn btn-secondary w-25 p-3 text-center'>View Customer Orders</Button></Link>
         {/* <div className="row">
           <div className="col-3">
               

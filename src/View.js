@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 function View() {
@@ -8,6 +8,10 @@ function View() {
     const params=useParams();
     const nav=useNavigate();
     console.log(params);
+
+    const goBack = () => {
+      nav(-1);
+    }
     const [det,setDet]=useState()
     const displayData=async()=>{
       // console.log("DATA",data);
@@ -29,10 +33,25 @@ function View() {
         
     }
   return (
-    <div className='container mt-5'>
+    
+    <div>
+
+<Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand ></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
+            
+            <Link className="links ms-5" to={`/login`}>Logout</Link>
+              <Link className="links ms-5" onClick={goBack}>Back</Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
         {det?
         (
-            <Row>
+            <Row className='container'>
         <Col lg={6} md={6}><img alt="" src={det.image} width="400"></img>
         </Col>
          <Col lg={6} md={6}><strong className="fs-3">{det.productName}</strong>

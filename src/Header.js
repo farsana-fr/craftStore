@@ -22,7 +22,7 @@ const goBack=()=>{
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Button onClick={goBack}>Back</Button>
+            {/* <Button onClick={goBack}>Back</Button> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

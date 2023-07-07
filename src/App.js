@@ -12,7 +12,8 @@ import AdminDash from './AdminDash';
 import View from './View';
 import Add from './Add';
 import EditProd from './EditProd';
-
+import MyOrder from './MyOrder';
+import Orders from './Orders';
 
 function App() {
   return (
@@ -26,9 +27,11 @@ function App() {
           <Route path="/" element={<Dashboard></Dashboard>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/myCart/:email" element={<MyCart></MyCart>}></Route>
+        <Route path="/myOrder/:email" element={<MyOrder></MyOrder>}></Route>
         <Route path="/View/:pid" element={<View></View>}></Route>
         <Route path="/Add" element={<Add></Add>}></Route>
         <Route path="/Edit/:id" element={<EditProd></EditProd>}></Route>
+        <Route path="/Orders" element={<Orders></Orders>}></Route>
       </Routes>
     <Footer></Footer>
     </div>

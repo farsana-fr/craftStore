@@ -20,7 +20,7 @@ function MyCart() {
         }
         try{
             console.log(params);
-            const result=await axios.post('http://localhost:8000/myCart',body)
+            const result=await axios.post('http://localhost:8000/myOrder',body)
             console.log(result.data.message);
             setItems(result.data.message);
             console.log("items",items);
@@ -31,56 +31,46 @@ function MyCart() {
       }
       console.log("items",items);
 
-      const removeFromCart=async(e,id)=>{
+      const cancelOrder=async(e,id)=>{
       
         const body={
           em:params.email,
           pid:id
         }
-        const result=await axios.post('http://localhost:8000/removeFromCart/',body)
+        const result=await axios.post('http://localhost:8000/cancelOrder/',body)
         alert(result.data.message)
         myCart()
       }
 
-      const orderProd=async(pid,pimage,pname,pprice)=>{
-        const body={
-          em:params.email,
-          pid:pid,
-          pimage:pimage,
-          pname:pname,
-          pprice:pprice
-        }
-       console.log("BODY",body);
-        const result=await axios.post('http://localhost:8000/orderProduct',body)
-        console.log("RES",result);
-        alert("Order Placed")
-        navigate(`/myOrder/${params.email}`)
-      }
     useEffect(()=>{
         myCart()
        
     },[])
   return (
     <div>
-      
+       
         <Navbar bg="light" expand="lg">
         <Container>
           <Navbar.Brand ></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+            <Link style={{"text-decoration":"none"}} className="links ms-5" to={`/myCart/${params.email}`}>My Cart</Link>
               <Nav.Link href="/login">Logout</Nav.Link>
               <Nav.Link onClick={goBack}>Back</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar> 
-      <h1>MY CART</h1>
+      <h1>MY ORDERS</h1>
       <Row>
+      
     {items?(
+       
       items.map(e=>(
-        
-          <Col id="c1" className="p-2" lg={4} md={6} >
+    
+          <Col id="c1" className="p-2 container" lg={4} md={6} >
+
           <Card style={{ width: '18rem' }} className='mt-5 ms-5'>
           <Card.Img variant="top" src={e.pimage} />
           <Card.Body>
@@ -90,17 +80,14 @@ function MyCart() {
               <br></br>
               <strong>Price: </strong>Rs. {e.pprice}/-
             </Card.Text>
-            <Button onClick={()=>removeFromCart(`${e.pid}`)}>Remove</Button>
-            {/* <Button className="btn btn-secondary ms-1" onClick={()=>removeFromCart(`${e.pid}`)}>Proceed to Buy</Button> */}
-            <Button className="btn btn-secondary ms-1" onClick={()=>orderProd(`${e.pid}`,`${e.pimage}`,`${e.pname}`,`${e.pprice}`)}>Proceed to Buy</Button>
-            {/* <Button variant="primary" onClick={()=>addToCart(`${prod.image}`,`${prod.productName}`,`${prod.price}`)}>Add to Cart</Button> */}
+            <Button onClick={()=>cancelOrder(`${e.pid}`)}>Cancel</Button>
           </Card.Body>
         </Card>
        </Col>
        
       )
       )
-    ):"em"
+    ):""
 
     }
 </Row> 
